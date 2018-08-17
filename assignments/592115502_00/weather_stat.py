@@ -11,11 +11,11 @@ def cal_ses_avg(key):
 
 
 def find_max_ses(key):
-    return [find_max(ses) for ses in chop_seasons(key)]
+    return [max(ses) for ses in chop_seasons(key)]
 
 
 def find_min_ses(key):
-    return [find_min(ses) for ses in chop_seasons(key)]
+    return [min(ses) for ses in chop_seasons(key)]
 
 
 def find_avg_across_all_city(key):
@@ -46,22 +46,6 @@ def chop_seasons(key):
         for each_ses in season:
             res.append(data[each_ses])
     return res
-
-
-def find_max(arr):
-    max_num = arr[0]
-    for elem in arr:
-        if elem > max_num:
-            max_num = elem
-    return max_num
-
-
-def find_min(arr):
-    min_num = arr[0]
-    for elem in arr:
-        if elem < min_num:
-            min_num = elem
-    return min_num
 
 
 def display_yearly_avg(key):
@@ -112,8 +96,8 @@ def display_ses_avg_across_city(key):
         print(("Average across all city in season {} AVG = {}".format(ses_counter, avg_res[i])))
         ses_counter += 1
 
-    print("Max = Season {}".format(avg_res.index(find_max(avg_res))+1))
-    print("Min = Season {}".format(avg_res.index(find_min(avg_res)) + 1))
+    print("Max = Season {}".format(avg_res.index(max(avg_res))+1))
+    print("Min = Season {}".format(avg_res.index(min(avg_res)) + 1))
 
 
 def display_ses_des_order_all_city(key):
