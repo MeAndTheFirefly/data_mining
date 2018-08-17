@@ -1,0 +1,5 @@
+# data for 953494 assignment 0
+# rows are cities, columns are months, cells are temperature
+# all values are outliers
+
+-30 150 190
