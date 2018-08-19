@@ -3,11 +3,11 @@ db = shelve.open('weather-shelve.dat')
 
 
 def cal_year_avg(key):
-    return [a/12 for a in list(map(sum, db[key]))]
+    return [round(a/len(db[key][0]), 2) for a in list(map(sum, db[key]))]
 
 
 def cal_ses_avg(key):
-    return [sum(ses) / 3 for ses in chop_seasons(key)]
+    return [round(sum(ses) / 3, 2) for ses in chop_seasons(key)]
 
 
 def find_max_ses(key):
@@ -26,12 +26,12 @@ def find_avg_across_all_city(key):
         res.append(season_avg[i:i + 4])
         i += 4
 
-    return [sum(col) / len(col) for col in list(zip(*res))]
+    return [round(sum(col) / len(col), 2) for col in list(zip(*res))]
 
 
 def order_ses_avg(key):
     res = []
-    avg_temp = [sum(ses) / 3 for ses in chop_seasons(key)]
+    avg_temp = [round(sum(ses) / 3, 2) for ses in chop_seasons(key)]
     i = 0
     while i < len(avg_temp):
         res += (sorted(avg_temp[i:i+4], reverse=True))
@@ -108,16 +108,14 @@ def display_ses_des_order_all_city(key):
 
 
 def display_des_order(key):
-    city_counter = 1
-    ses_counter = 1
     res = order_ses_avg(key)
-    for i in range(len(res)):
-        print(("{:>19} {:>3}".format(res[i], '>')), end='')
-        ses_counter += 1
-        if (i + 1) % 4 == 0:
-            city_counter += 1
-            ses_counter = 1
-            print('\n')
+    season_avg = cal_ses_avg(key)
+    i = 0
+    while i < len(res):
+        print('< '.join(format(str(e), '<7') for e in res[i:i+4]))
+        i += 4
+
+        # print(("{:>8} {:>8}".format(res[i], '> ')), end='')
 
 
 if __name__ == '__main__':
