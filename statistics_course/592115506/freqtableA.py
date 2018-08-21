@@ -21,7 +21,7 @@ print("so bounds are", bnds)
 print()
 
 # count the frequencies of the data for each interval
-freq = [ 0 for x in range(10) ]
+freq = [0 for x in range(10)]
 for v in dat:
     for i in range(len(bnds)-1):
         if v < bnds[i+1]:
