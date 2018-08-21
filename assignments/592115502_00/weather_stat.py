@@ -109,7 +109,6 @@ def display_ses_des_order_all_city(key):
 
 def display_des_order(key):
     res = order_ses_avg(key)
-    season_avg = cal_ses_avg(key)
     i = 0
     while i < len(res):
         print('< '.join(format(str(e), '<7') for e in res[i:i+4]))
