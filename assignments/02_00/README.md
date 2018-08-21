@@ -1,6 +1,3 @@
-# GUOQING LI
-## ID: 592115502
-
 How to compile:
 Python3 weather_stat.py 
 
