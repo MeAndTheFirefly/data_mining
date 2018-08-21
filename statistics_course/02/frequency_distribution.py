@@ -1,5 +1,3 @@
-import decimal
-
 data = \
 [87, 51, 56, 59, 90, 67, 74, 96, 73, 80,
  92, 68, 92, 79, 95, 68, 87, 93, 91, 80,
@@ -57,21 +55,20 @@ def cal_mo_th(fre):
 def display_frequency_table(low, c, width):
     tot = len(data)
     class_lim = make_class(low, c, width)
-    cla_lim = ['{} - {}'.format(e[0], e[1]) for e in class_lim]
+    fomat_class = ['{} - {}'.format(e[0], e[1]) for e in class_lim]
+
     class_bds = [[e[0] - 0.5, e[1] + 0.5] for e in class_lim]
+    fomat_bds = ['{} - {}'.format(e[0], e[1]) for e in class_bds]
     fre_count = count_freq_in_range(class_lim)
     rela_fre  = [e/tot for e in fre_count]
     re_les_th = cal_le_th(fre_count)
     re_mo_th = cal_mo_th(fre_count)
     cu_les_th = [e / tot for e in re_les_th]
     cu_mo_th = [e / tot for e in re_mo_th]
-    print("  Limit  Bds    Freq   RelFre  re_les   re_mo_th   cu_les_th  cu_mo_th ")
-    print("+------+------+------+--------+--------+---------+-----------+---------")
+    print("  Limit      Bds        Freq   RelFre  re_les   re_mo_th   cu_les_th  cu_mo_th ")
+    print("+----------+----------+------+--------+--------+---------+-----------+---------")
     for i in range(len(class_bds)):
-        print(cla_lim[i])
-
-
-
+        print('{:>9} {:>19}'.format(fomat_class[i], fomat_bds[i]))
 
 
 display_frequency_table(min(data), 5, 10)
