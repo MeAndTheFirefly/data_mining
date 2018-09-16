@@ -33,8 +33,8 @@ def count_labels(dat1):
     return [c_setosa, c_versicolor, c_virginica]
 
 
-def display_info():
-    res = holdout(data, 0.8)
+def display_info(p):
+    res = holdout(data, p)
     x_train = res[0]
     x_test = res[1]
     x_tr = count_labels(x_train)
@@ -51,10 +51,10 @@ def display_info():
 
 def display_top_5(dat02):
     for e in dat02[:4]:
-        print(e[:3])
+        print("index: {:<5} row = {}".format(data.index(e), e))
 
 
-display_info()
+display_info(0.79)  # adjust the fraction here
 
 
 
