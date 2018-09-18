@@ -1,5 +1,5 @@
 import csv
-from random import shuffle
+from random import shuffle, randint
 
 with open("iris.data", 'r') as f:
     res_dat = {}
@@ -9,6 +9,7 @@ with open("iris.data", 'r') as f:
     for i in range(1, len(data) - 1):
         label = data[i][4]
         dat_row = list(map(float, data[i][:4]))
+        dat_row.append(i)   # append the index of each record
         if label not in cla:
             cla.append(label)
             res_dat[label] = [dat_row]
@@ -52,25 +53,50 @@ def display_info(p):
     test = res[1]
     tra_c = res[2]
     te_c = res[3]
-    print("Train sample data in total = {} {}\n".
+    print("Total train sample = {} {}".
           format(count_tot_sample(train), tra_c))
+    print('\n')
     print('Top 5 rows Train_X\n')
-    display_top_5(train)
-    print("test sample data in total = {} {}\n".
+    train_set = top_5(train)
+    display_x(train_set)
+    print('\n')
+    print('Top 5 rows Train_Y\n')
+    display_y(train_set)
+
+    print('\n')
+    print("Total test sample = {} {}\n".
           format(count_tot_sample(test), te_c))
+
+    test_set = top_5(test)
+
     print('Top 5 rows Test_X\n')
-    display_top_5(test)
+    display_x(test_set)
+    print('\n')
+    print('Top 5 rows Test_Y\n')
+    display_y(test_set)
 
 
-def display_top_5(dict0):
-    keys = list(dict0.keys())
-    inx = list(range(len(keys)))
+def display_x(tup):
+    for e in tup:
+        print("index: {}, {}".format(e[0][-1], e[0][:4]))
+
+
+def display_y(tup):
+    for e in tup:
+        print("index: {}, {}".format(e[0][-1], e[1]))
+
+
+def top_5(dict0):
+    keys = list(dict0.keys())  # get the list of keys (Ys)
     c = 0
+    res = []
     while c < 5:
-        print("index: {:>3} {:>4} {:<10}\n".format
-              (res_dat[keys[inx[c % 3]]].index(dict0[keys[inx[c % 3]]][c]), keys[inx[c % 3]],
-               ' '.join(str(e) for e in dict0[keys[inx[c % 3]]][c])))
+        rad = randint(0, len(keys) - 1)  # get random index of keys
+        y = keys[rad]
+        x = dict0[y][c]
+        res.append((x, y))
         c += 1
+    return res
 
 
 def count_tot_sample(dict1):
@@ -80,7 +106,7 @@ def count_tot_sample(dict1):
     return tot_sample
 
 
-display_info(0.773)  # adjust the fraction here
+display_info(0.7)  # adjust the fraction here
 
 
 

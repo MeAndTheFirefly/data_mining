@@ -33,41 +33,36 @@ def count_labels(dat1):
     return [c_setosa, c_versicolor, c_virginica]
 
 
-def display_info(p):
+def get_output(p):
     res = holdout(data, p)
-    x_train = res[0]
-    x_test = res[1]
-    x_tr = count_labels(x_train)
-    x_te = count_labels(x_test)
+    train = res[0]
+    test = res[1]
+    x_tr = count_labels(train)
+    x_te = count_labels(test)
     print("Train sample data in total = {} Iris-versicolor = {} , Iris-virginica = {}, Iris-setosa = {}".
-          format(len(x_train), x_tr[0], x_tr[1], x_tr[2]))
+          format(len(train), x_tr[0], x_tr[1], x_tr[2]))
     print('Top 5 rows Train_X')
-    display_top_5(x_train)
+    display_top_5_x(train)
+    print('Top 5 row Train_Y')
+    display_top_5_y(train)
+
     print("Test sample data in total = {} Iris-versicolor = {} , Iris-virginica = {}, Iris-setosa = {}".
-          format(len(x_test), x_te[0], x_te[1], x_te[2]))
+          format(len(test), x_te[0], x_te[1], x_te[2]))
     print('Top 5 rows Test_X')
-    display_top_5(x_test)
+    display_top_5_x(test)
+
+    print('Top 5 rows Test_Y')
+    display_top_5_y(test)
 
 
-def display_top_5(dat02):
+def display_top_5_x(dat02):
     for e in dat02[:4]:
-        print("index: {:<5} row = {}".format(data.index(e), e))
+        print("index: {:<5} {}".format(data.index(e), e[:4]))
 
 
-display_info(0.79)  # adjust the fraction here
+def display_top_5_y(dat03):
+    for e in dat03[:4]:
+        print("index: {:<5} {}".format(data.index(e), e[-1]))
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+get_output(0.83)  # please adjust the fraction here
