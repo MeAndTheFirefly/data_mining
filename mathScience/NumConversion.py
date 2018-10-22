@@ -1,5 +1,5 @@
 
-def baby_num(baby_symbol):   # use coma to separate each column.
+def baby_num(baby_symbol):   # use space to separate each column.
     token = baby_symbol.split(' ')
     tot = 0
     for i in range(len(token)):
@@ -11,7 +11,7 @@ def count_occur(symbol, sentence):
     return sentence.count(symbol)
 
 
-def mayan_to_num(numb):   # put the from top to bottom
+def mayan_to_num(numb):   # put the from top to bottom, use space to separate each colmn
     tot = 0
     token = numb.split()
     col_size = len(token)
